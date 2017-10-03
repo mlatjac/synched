@@ -1,0 +1,7 @@
+2017/10/03 Miguel
+Done/Not Done since last SCRUM
+-No Last SCRUM yet-
+Do until next SCRUM
+Complete ERD
+Where do i need help
+Find a proper Diff Patch Library
