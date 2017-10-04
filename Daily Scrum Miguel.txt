@@ -5,3 +5,10 @@ Do until next SCRUM
 Complete ERD
 Where do i need help
 Find a proper Diff Patch Library
+
+2017/10/04 Miguel
+Done/NotDone
+DONE - Complete ERD
+Submit electronic version of proposal
+Code proof of concept change workflow
+Start of main window GUI layout
