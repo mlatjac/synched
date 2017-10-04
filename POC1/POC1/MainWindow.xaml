@@ -13,8 +13,8 @@
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="10,251,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnListen" Content="Listen" HorizontalAlignment="Left" Margin="432,251,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="10,251,0,0" VerticalAlignment="Top" Width="75" Click="btnUpdate_Click"/>
+        <Button x:Name="btnListen" Content="Listen" HorizontalAlignment="Left" Margin="432,251,0,0" VerticalAlignment="Top" Width="75" Click="btnListen_Click"/>
 
     </Grid>
 </Window>

@@ -48,6 +48,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="xmldiffpatch">
+      <HintPath>\\jacstudents\students\8547102\MSDN\SQLXML Bulkload in .NET Code Sample\xmldiffpatch.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
