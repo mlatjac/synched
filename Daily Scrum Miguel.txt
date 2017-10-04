@@ -12,3 +12,4 @@ DONE - Complete ERD
 Submit electronic version of proposal
 Code proof of concept change workflow
 Start of main window GUI layout
+Add 6 user stories with task breakdown
