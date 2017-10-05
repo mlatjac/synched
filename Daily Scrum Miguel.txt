@@ -13,3 +13,18 @@ Submit electronic version of proposal
 Code proof of concept change workflow
 Start of main window GUI layout
 Add 6 user stories with task breakdown
+
+2017/10/05 Miguel
+Done/NotDone
+DONE - Complete ERD
+DONE - Submit electronic version of proposal
+DONE - Add 6 user stories with task breakdown
+NOT DONE Code proof of concept change workflow
+NOT DONE Start of main window GUI layout
+Do until next SCRUM
+Test Azur DB connection
+Simplify stream for diff patch
+Add and expand 3 more user stories
+Experiment DB Sync/Lock
+Where do i need help
+DB locking / synch

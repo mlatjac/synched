@@ -25,6 +25,8 @@ namespace POC1
     public class SynchEdDB
     {
         static string connString = @"Data Source=localhost;Initial Catalog=SynchedPOC1;User ID=sa;Password=root";
+        // @"Data Source=mlatjac.database.windows.net;Initial Catalog=TestDB;User ID=serveradmin;Password=rootR00t";
+
         SqlConnection conn;
 
         public SynchEdDB()
