@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiWindowTest
 {
-    class UserAccess
+    class SynchedUserAccess
     {
         private string _name;
         private bool _canWrite;

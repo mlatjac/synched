@@ -24,11 +24,11 @@ namespace MultiWindowTest
             InitializeComponent();
 
             // Add data to test list view
-            List<UserAccess> lstUserAccess = new List<UserAccess>();
+            List<SynchedUserAccess> lstUserAccess = new List<SynchedUserAccess>();
 
-            lstUserAccess.Add(new UserAccess { Name = "Frank", CanWrite = true });
-            lstUserAccess.Add(new UserAccess { Name = "Mary", CanWrite = true });
-            lstUserAccess.Add(new UserAccess { Name = "Barry", CanWrite = false });
+            lstUserAccess.Add(new SynchedUserAccess { Name = "Frank", CanWrite = true });
+            lstUserAccess.Add(new SynchedUserAccess { Name = "Mary", CanWrite = true });
+            lstUserAccess.Add(new SynchedUserAccess { Name = "Barry", CanWrite = false });
 
             lvCollaborators.ItemsSource = lstUserAccess;
 
