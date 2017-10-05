@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiWindowTest", "MultiWindowTest\MultiWindowTest.csproj", "{7CBAF2D6-A40B-4E46-8E2E-F531C0CD5E90}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CBAF2D6-A40B-4E46-8E2E-F531C0CD5E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CBAF2D6-A40B-4E46-8E2E-F531C0CD5E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CBAF2D6-A40B-4E46-8E2E-F531C0CD5E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CBAF2D6-A40B-4E46-8E2E-F531C0CD5E90}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1EFC4A2-B437-4A75-8A7C-63DD10B0175C}
+	EndGlobalSection
+EndGlobal
