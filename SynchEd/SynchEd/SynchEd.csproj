@@ -60,6 +60,8 @@
     <Compile Include="SelectDocumentDialog.xaml.cs">
       <DependentUpon>SelectDocumentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SynchedUser.cs" />
+    <Compile Include="SynchedUserAccess.cs" />
     <Page Include="CollaboratorsDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
