@@ -28,7 +28,7 @@
                     <ColumnDefinition Width="5" />
                     <ColumnDefinition Width="45" />
                 </Grid.ColumnDefinitions>
-                <RichTextBox Grid.Column="1" Margin="10">
+                <RichTextBox Grid.Column="0" Margin="10">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
                             <Setter Property="Margin" Value="0" />
