@@ -28,3 +28,16 @@ Add and expand 3 more user stories
 Experiment DB Sync/Lock
 Where do i need help
 DB locking / synch
+
+2017/10/06 Miguel
+Done/NotDone
+DONE - Code proof of concept change workflow
+DONE - Start of main window GUI layout
+DONE - Test Azur DB connection
+DONE - Experiment DB Sync/Lock
+NOT DONE Simplify stream for diff patch
+NOT DONE Add and expand 3 more user stories
+Do until next SCRUM
+Add and expand 3 more user stories
+Code squeleton of Model layer (DB and object class with interdependancies)
+Where do i need help
