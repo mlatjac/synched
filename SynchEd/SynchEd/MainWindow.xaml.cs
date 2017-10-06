@@ -20,9 +20,25 @@ namespace SynchEd
     /// </summary>
     public partial class MainWindow : Window
     {
+        private CollaboratorsDialog dlgCollabs;
+        private SelectDocumentDialog dlgSelectDoc;
+        private SaveAsDialog dlgSaveAs;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            // Initialize Dialogs
+            dlgCollabs = new CollaboratorsDialog();
+            dlgSelectDoc = new SelectDocumentDialog();
+            dlgSaveAs = new SaveAsDialog();
+
+
+            // FIXME: Remove loop through dialogs
+            dlgCollabs.ShowDialog();
+            dlgSelectDoc.ShowDialog();
+            dlgSaveAs.ShowDialog();
+
         }
     }
 }
