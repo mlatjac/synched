@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SynchEd
 {
-    class SynchedUser
+    public class SynchedUser
     {
         private string _name;
 
@@ -23,7 +23,7 @@ namespace SynchEd
         }
     }
 
-    class SynchedDocument
+    public class SynchedDocument
     {
         //private SynchedUser _owner;
         private string _ownwer;

@@ -20,9 +20,13 @@ namespace SynchEd
     /// </summary>
     public partial class MainWindow : Window
     {
+        // GUI-related
         private CollaboratorsDialog dlgCollabs;
         private SelectDocumentDialog dlgSelectDoc;
         private SaveAsDialog dlgSaveAs;
+
+        // Model related
+        private SynchedModel Model;
 
         // FIXME Remove the next procedure/ test
         private void LoopThroughDialogs()
@@ -34,62 +38,63 @@ namespace SynchEd
         // FIXME Remove test data procedure
         private void SetupTestData()
         {
-            // Add data to test list view
-            List<SynchedUserAccess> lstUserAccess = new List<SynchedUserAccess>();
+            // Add data to test views
 
-            lstUserAccess.Add(new SynchedUserAccess { Name = "Frank", CanWrite = true });
-            lstUserAccess.Add(new SynchedUserAccess { Name = "Mary", CanWrite = true });
-            lstUserAccess.Add(new SynchedUserAccess { Name = "Barry", CanWrite = false });
+            dlgCollabs.lvCollaborators.ItemsSource = Model.GetAllDocumentAccesses();
 
-            dlgCollabs.lvCollaborators.ItemsSource = lstUserAccess;
+            dlgCollabs.lvUsers.ItemsSource = Model.GetAllUsers();
 
-            List<SynchedUser> lstAllUsers = new List<SynchedUser>();
-            lstAllUsers.Add(new SynchedUser { Name = "Henry" });
-            lstAllUsers.Add(new SynchedUser { Name = "Frank" });
-            lstAllUsers.Add(new SynchedUser { Name = "Mary" });
-            lstAllUsers.Add(new SynchedUser { Name = "Barry" });
-            lstAllUsers.Add(new SynchedUser { Name = "Fred" });
-            lstAllUsers.Add(new SynchedUser { Name = "Erika" });
-            lstAllUsers.Add(new SynchedUser { Name = "Suzan" });
-            lstAllUsers.Add(new SynchedUser { Name = "William" });
-            lstAllUsers.Add(new SynchedUser { Name = "Arthur" });
-            dlgCollabs.lvUsers.ItemsSource = lstAllUsers;
+            dlgSelectDoc.lvMyDocs.ItemsSource = Model.GetAllUsersDocs();
+
+            dlgSelectDoc.lvCollaboratorDocs.ItemsSource = Model.GetAllCollaborationDocs(false); // Don't limit to writeOnly Docs
+
 
             // Add test data
-            List<SynchedDocument> lstMyDocs = new List<SynchedDocument>();
-            lstMyDocs.Add(new SynchedDocument { Name = "Monday Menu" });
-            lstMyDocs.Add(new SynchedDocument { Name = "CV" });
-            lstMyDocs.Add(new SynchedDocument { Name = "Shopping List" });
-            lstMyDocs.Add(new SynchedDocument { Name = "My Novel -- Chapter 1" });
-            lstMyDocs.Add(new SynchedDocument { Name = "July English Assignment" });
-            dlgSelectDoc.lvMyDocs.ItemsSource = lstMyDocs;
+           dlgSaveAs.lvMyDocs.ItemsSource = Model.GetAllUsersDocs();
 
-            List<SynchedDocument> lstCollabDocs = new List<SynchedDocument>();
-            lstCollabDocs.Add(new SynchedDocument { Name = "School Project 1", OwnerName = "Mary" });
-            lstCollabDocs.Add(new SynchedDocument { Name = "Wedding Plans", OwnerName = "Suzan" });
-            lstCollabDocs.Add(new SynchedDocument { Name = "Daily Scrum", OwnerName = "Sandy" });
-            lstCollabDocs.Add(new SynchedDocument { Name = "IT Course Outline", OwnerName = "Dave" });
-            dlgSelectDoc.lvCollaboratorDocs.ItemsSource = lstCollabDocs;
+        }
 
-            // Add test data
-            List<SynchedDocument> lstMyDocsSaveAs = new List<SynchedDocument>();
-            lstMyDocs.Add(new SynchedDocument { Name = "Monday Menu" });
-            lstMyDocs.Add(new SynchedDocument { Name = "CV" });
-            lstMyDocs.Add(new SynchedDocument { Name = "Shopping List" });
-            lstMyDocs.Add(new SynchedDocument { Name = "My Novel -- Chapter 1" });
-            lstMyDocs.Add(new SynchedDocument { Name = "July English Assignment" });
-            dlgSaveAs.lvMyDocs.ItemsSource = lstMyDocsSaveAs;
-
+        private void AbortStartupAndExit()
+        {
+            // FIXME Application.Current.Shutdown() doesn't work !
+            Application.Current.Shutdown();
         }
 
         public MainWindow()
         {
-            InitializeComponent();
+            // Initialize GUI
+            try
+            {
+                // Main Window Components
+                InitializeComponent();
 
-            // Initialize Dialogs
-            dlgCollabs = new CollaboratorsDialog();
-            dlgSelectDoc = new SelectDocumentDialog();
-            dlgSaveAs = new SaveAsDialog();
+                // Dialogs
+                dlgCollabs = new CollaboratorsDialog();
+                dlgSelectDoc = new SelectDocumentDialog();
+                dlgSaveAs = new SaveAsDialog();
+            }
+            catch (Exception exEx)
+            {
+                MessageBox.Show("There was a problem intializing the user interface " + exEx.Message);
+                AbortStartupAndExit();
+            }
+
+            try
+            {
+                // Initialize Model
+
+                // Fetch user information
+                String strSynchedUser = "UUUU"; //FIXME: actually fetch user info from resources
+
+                // Complete model initialization
+                Model = SynchedModel.GetInstance(rtbDocumentEditor.Document, strSynchedUser);
+
+            }
+            catch (Exception exEx)
+            {
+                MessageBox.Show("There was a problem connecting to database " + exEx.Message);
+                AbortStartupAndExit();
+            }
 
             // FIXME Remove test data and dialog loop
             SetupTestData();

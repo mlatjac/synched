@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Class2.cs" />
     <Compile Include="SaveAsDialog.xaml.cs">
       <DependentUpon>SaveAsDialog.xaml</DependentUpon>
     </Compile>

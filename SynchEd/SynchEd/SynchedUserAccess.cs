@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SynchEd
 {
-    class SynchedUserAccess
+    public class SynchedUserAccess
     {
         private string _name;
         private bool _canWrite;
