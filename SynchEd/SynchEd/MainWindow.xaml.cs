@@ -60,6 +60,7 @@ namespace SynchEd
             Application.Current.Shutdown();
         }
 
+
         public MainWindow()
         {
             // Initialize GUI
@@ -84,7 +85,13 @@ namespace SynchEd
                 // Initialize Model
 
                 // Fetch user information
-                String strSynchedUser = "UUUU"; //FIXME: actually fetch user info from resources
+                String strSynchedUser = Properties.Settings.Default.SynchedUserKey; // Get User key from application settings
+
+                if (strSynchedUser == null || strSynchedUser.Equals(""))
+                {
+                    MessageBox.Show("This application requires a user account on the SyncEd website. Create an account and install the application directly from your profile page.");
+                    AbortStartupAndExit();
+                }
 
                 // Complete model initialization
                 Model = SynchedModel.GetInstance(rtbDocumentEditor.Document, strSynchedUser);
