@@ -13,6 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+// For ClickOnce web config
+using System.Deployment.Application;
+using System.Web;
+using System.Collections.Specialized;
+
 namespace SynchEd
 {
     /// <summary>
@@ -60,6 +65,20 @@ namespace SynchEd
             Application.Current.Shutdown();
         }
 
+        private string SetupUserKeyFromInstallURL()
+        {
+
+            NameValueCollection nameValueTable = new NameValueCollection();
+
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                string queryString = ApplicationDeployment.CurrentDeployment.ActivationUri.Query;
+                nameValueTable = HttpUtility.ParseQueryString(queryString);
+            }
+
+            return nameValueTable.Get("UserKey");
+            
+        }
 
         public MainWindow()
         {
@@ -83,6 +102,9 @@ namespace SynchEd
             try
             {
                 // Initialize Model
+
+                // Fetch information from installation
+                SetupUserKeyFromInstallURL();
 
                 // Fetch user information
                 String strSynchedUser = Properties.Settings.Default.SynchedUserKey; // Get User key from application settings
