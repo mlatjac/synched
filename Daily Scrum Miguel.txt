@@ -41,3 +41,11 @@ Do until next SCRUM
 Add and expand 3 more user stories
 Code squeleton of Model layer (DB and object class with interdependancies)
 Where do i need help
+
+2017/10/10
+Done/NotDone
+DONE - Code squeleton of Model layer (DB and object class with interdependancies)
+DONE - Add and expand 3 more user stories
+Do until next SCRUM
+Add icons to UI
+Where do i need help
