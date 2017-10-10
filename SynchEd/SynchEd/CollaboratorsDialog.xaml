@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SynchEd"
         mc:Ignorable="d"
-        Title="CollaboratorsDialog" Height="300" Width="300">
+        Title="CollaboratorsDialog" Height="300" Width="538.655">
     <Grid>
         <Label Content="Directory" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="lvUsers" HorizontalAlignment="Left" Height="100" Margin="10,41,0,0" VerticalAlignment="Top" Width="100">
+        <ListView x:Name="lvUsers" HorizontalAlignment="Left" Height="188" Margin="10,41,0,0" VerticalAlignment="Top" Width="163">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"/>
@@ -16,20 +16,20 @@
             </ListView.ItemTemplate>
 
         </ListView>
-        <Button x:Name="wCollabs_btnAdd" Content="Add" HorizontalAlignment="Left" Margin="173,50,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="wCollabs_btnRemove" Content="Remove" HorizontalAlignment="Left" Margin="173,94,0,0" VerticalAlignment="Top" Width="75"/>
-        <ListView x:Name="lvCollaborators" HorizontalAlignment="Left" Height="100" Margin="325,50,0,0" VerticalAlignment="Top" Width="100">
+        <Button x:Name="wCollabs_btnAdd" Content="Add" HorizontalAlignment="Left" Margin="209,51,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="wCollabs_btnRemove" Content="Remove" HorizontalAlignment="Left" Margin="209,86,0,0" VerticalAlignment="Top" Width="75"/>
+        <ListView x:Name="lvCollaborators" HorizontalAlignment="Left" Height="188" Margin="325,41,0,0" VerticalAlignment="Top" Width="196">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="25">
-                        <Image />
+                    <GridViewColumn Width="35">
+                        <Image Source="pencil.png" Stretch="None" />
                         <GridViewColumn.CellTemplate >
                             <DataTemplate>
                                 <CheckBox Tag="{Binding CanWrite}" IsChecked="{Binding CanWrite}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Name" Width="70" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Name" Width="210" DisplayMemberBinding="{Binding Name}" />
                 </GridView>
             </ListView.View>
         </ListView>

@@ -7,15 +7,43 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File">
-                <MenuItem Header="_New" />
-                <MenuItem Header="_Open" />
-                <MenuItem Header="_Save" />
+        <DockPanel DockPanel.Dock="Top">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New" />
+                    <MenuItem Header="_Open" />
+                    <MenuItem Header="_Save" />
+                    <Separator />
+                    <MenuItem Header="_Exit" />
+                </MenuItem>
+            </Menu>
+            <ToolBar>
+                <Button Command="ApplicationCommands.Open">
+                    <Image Source="db-file-format-symbol.png" Width="16" Height="16" />
+                </Button>
+                <Button Command="ApplicationCommands.Save">
+                    <Image Source="save.png" Width="16" Height="16" />
+                </Button>
                 <Separator />
-                <MenuItem Header="_Exit" />
-            </MenuItem>
-        </Menu>
+                <ToggleButton Command="EditingCommands.ToggleBold" Name="btnBold">
+                    <Image Source="bold.png" Width="16" Height="16" />
+                </ToggleButton>
+                <ToggleButton Command="EditingCommands.ToggleItalic" Name="btnItalic">
+                    <Image Source="italic.png" Width="16" Height="16" />
+                </ToggleButton>
+                <ToggleButton Command="EditingCommands.ToggleUnderline" Name="btnUnderline">
+                    <Image Source="underline.png" Width="16" Height="16" />
+                </ToggleButton>
+                <Separator />
+                <ComboBox Name="cmbFontFamily" Width="150" SelectionChanged="cmbFontFamily_SelectionChanged" />
+                <ComboBox Name="cmbFontSize" Width="50" IsEditable="True" TextBoxBase.TextChanged="cmbFontSize_TextChanged" />
+                <Separator />
+                <Button x:Name="btnPrint" Click="btnPrint_Click">
+                    <Image Source="print.png" Width="16" Height="16"></Image>
+                </Button>
+            </ToolBar>
+
+        </DockPanel>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
                 <TextBlock Name="lblCursorPosition" />
@@ -28,7 +56,7 @@
                     <ColumnDefinition Width="5" />
                     <ColumnDefinition Width="45" />
                 </Grid.ColumnDefinitions>
-                <RichTextBox x:Name="rtbDocumentEditor" Grid.Column="0" Margin="10">
+                <RichTextBox x:Name="rtbDocumentEditor" Grid.Column="0" Margin="10" SelectionChanged="rtbDocumentEditor_SelectionChanged" SpellCheck.IsEnabled="True">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
                             <Setter Property="Margin" Value="0" />

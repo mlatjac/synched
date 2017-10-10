@@ -29,6 +29,7 @@ namespace SynchEd
         private CollaboratorsDialog dlgCollabs;
         private SelectDocumentDialog dlgSelectDoc;
         private SaveAsDialog dlgSaveAs;
+        private PrintDialog dlgPrint;
 
         // Model related
         private SynchedModel Model;
@@ -91,7 +92,7 @@ namespace SynchEd
             }
             catch (Exception exEx)
             {
-                return; // Fail silently. We'll take care of not having a user ket elsewhere in the initialization
+                return; // Fail silently. We'll take care of not having a user key elsewhere in the initialization
             }
         }
 
@@ -104,11 +105,16 @@ namespace SynchEd
             {
                 // Main Window Components
                 InitializeComponent();
+                // Font menus
+                cmbFontFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
+                cmbFontSize.ItemsSource = new List<double>() { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
+
 
                 // Dialogs
                 dlgCollabs = new CollaboratorsDialog();
                 dlgSelectDoc = new SelectDocumentDialog();
                 dlgSaveAs = new SaveAsDialog();
+                dlgPrint = new PrintDialog();
             }
             catch (Exception exEx)
             {
@@ -127,12 +133,15 @@ namespace SynchEd
 
                 if (String.IsNullOrEmpty(strSynchedUser) == true)
                 {
-                    MessageBox.Show("This application requires a user account on the SyncEd website. Create an account and install the application directly from your profile page.");
-                    AbortStartupAndExit();
+                    // FIXME Put user checking back in
+                    //MessageBox.Show("This application requires a user account on the SyncEd website. Create an account and install the application directly from your profile page.");
+                    //AbortStartupAndExit();
+                    strSynchedUser = "UUUZ";
                 }
                 // Complete model initialization
                 Model = SynchedModel.GetInstance(rtbDocumentEditor.Document, strSynchedUser);
 
+                // Setup spell check default language
             }
             catch (Exception exEx)
             {
@@ -143,6 +152,73 @@ namespace SynchEd
             // FIXME Remove test data and dialog loop
             SetupTestData();
             LoopThroughDialogs();
+        }
+
+        private void cmbFontFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbFontFamily.SelectedItem != null)
+                 rtbDocumentEditor.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, cmbFontFamily.SelectedItem);
+
+        }
+
+        private void cmbFontSize_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            rtbDocumentEditor.Selection.ApplyPropertyValue(Inline.FontSizeProperty, cmbFontSize.Text);
+
+        }
+
+        private void rtbDocumentEditor_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            object temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontWeightProperty);
+            btnBold.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontWeights.Bold));
+            temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontStyleProperty);
+            btnItalic.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontStyles.Italic));
+            temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+            btnUnderline.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(TextDecorations.Underline));
+
+            temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontFamilyProperty);
+            cmbFontFamily.SelectedItem = temp;
+            temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontSizeProperty);
+            cmbFontSize.Text = temp.ToString();
+        }
+
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        {
+            // FIXME Rich Text Box text dissapears after printing
+            // Need to clone document
+            IDocumentPaginatorSource idpSource = rtbDocumentEditor.Document;
+
+            /*
+            FlowDocument doc = new FlowDocument();
+
+            // Create a Section
+            Section sec = new Section();
+
+            // Create first Paragraph
+            Paragraph p1 = new Paragraph();
+            // Create and add a new Bold, Italic and Underline
+            Bold bld = new Bold();
+            bld.Inlines.Add(new Run("First Paragraph"));
+            Italic italicBld = new Italic();
+            italicBld.Inlines.Add(bld);
+            Underline underlineItalicBld = new Underline();
+            underlineItalicBld.Inlines.Add(italicBld);
+            // Add Bold, Italic, Underline to Paragraph
+            p1.Inlines.Add(underlineItalicBld);
+
+            // Add Paragraph to Section
+            sec.Blocks.Add(p1);
+
+            // Add Section to FlowDocument
+            doc.Blocks.Add(sec);
+
+            IDocumentPaginatorSource idpSource = doc; */
+
+            if (dlgPrint.ShowDialog() == true)
+            {
+                dlgPrint.PrintDocument(idpSource.DocumentPaginator, "SynchEdPrinting");
+                //this.Activate();
+            }
         }
     }
 }

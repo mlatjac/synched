@@ -26,7 +26,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://10.64.21.11:8080/</InstallUrl>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>21</ApplicationRevision>
+    <ApplicationRevision>24</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -163,6 +163,27 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bold.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="underline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="italic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="db-file-format-symbol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="print.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
