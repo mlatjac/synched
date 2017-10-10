@@ -55,7 +55,7 @@ namespace SynchEd
 
 
             // Add test data
-           dlgSaveAs.lvMyDocs.ItemsSource = Model.GetAllUsersDocs();
+            dlgSaveAs.lvMyDocs.ItemsSource = Model.GetAllUsersDocs();
 
         }
 
@@ -65,20 +65,37 @@ namespace SynchEd
             Application.Current.Shutdown();
         }
 
-        private string SetupUserKeyFromInstallURL()
+        private void SetupUserKeyFromInstallURL()
         {
-
+            // Setup User Key from instllation URL when we're first run
             NameValueCollection nameValueTable = new NameValueCollection();
-
-            if (ApplicationDeployment.IsNetworkDeployed)
+            String strUserKey;
+            try
             {
-                string queryString = ApplicationDeployment.CurrentDeployment.ActivationUri.Query;
-                nameValueTable = HttpUtility.ParseQueryString(queryString);
-            }
+                if (ApplicationDeployment.IsNetworkDeployed)
+                {
+                    string queryString = ApplicationDeployment.CurrentDeployment.ActivationUri.Query;
 
-            return nameValueTable.Get("UserKey");
-            
+                    if (String.IsNullOrEmpty(queryString) == true)
+                        return;
+
+                    nameValueTable = HttpUtility.ParseQueryString(queryString);
+                    strUserKey = nameValueTable.Get("UserKey");
+                    if (string.IsNullOrEmpty(strUserKey) != true)
+                    {
+                        Properties.Settings.Default.SynchedUserKey = strUserKey;
+                        Properties.Settings.Default.Save();
+
+                    }
+                }
+            }
+            catch (Exception exEx)
+            {
+                return; // Fail silently. We'll take care of not having a user ket elsewhere in the initialization
+            }
         }
+
+
 
         public MainWindow()
         {
@@ -102,19 +119,17 @@ namespace SynchEd
             try
             {
                 // Initialize Model
-
                 // Fetch information from installation
                 SetupUserKeyFromInstallURL();
 
                 // Fetch user information
                 String strSynchedUser = Properties.Settings.Default.SynchedUserKey; // Get User key from application settings
 
-                if (strSynchedUser == null || strSynchedUser.Equals(""))
+                if (String.IsNullOrEmpty(strSynchedUser) == true)
                 {
                     MessageBox.Show("This application requires a user account on the SyncEd website. Create an account and install the application directly from your profile page.");
                     AbortStartupAndExit();
                 }
-
                 // Complete model initialization
                 Model = SynchedModel.GetInstance(rtbDocumentEditor.Document, strSynchedUser);
 
