@@ -1,0 +1,32 @@
+﻿<Window x:Class="SpellCheckLanguageSelectPOC.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SpellCheckLanguageSelectPOC"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <StackPanel>
+            <TextBox SpellCheck.IsEnabled="True"
+            Language="{Binding SelectedItem.Content, ElementName=lg, ConverterCulture=en-us}">
+
+                Turtle tortue tortuga Schildkröte
+
+            </TextBox>
+            <ComboBox Name="lg">
+                <ComboBoxItem Selector.IsSelected="True">en-US</ComboBoxItem>
+                <ComboBoxItem>fr-FR</ComboBoxItem>
+                <ComboBoxItem>es-ES</ComboBoxItem>
+                <ComboBoxItem>de-DE</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        <RichTextBox HorizontalAlignment="Left" Height="220" Margin="10,53,0,0" VerticalAlignment="Top" Width="497" SpellCheck.IsEnabled="True">
+            <FlowDocument Language="{Binding SelectedItem.Content, ElementName=lg, ConverterCulture=en-us}">
+                <Paragraph>
+                    <Run>Turtle tortue tortuga Schildkröte</Run>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </Grid>
+</Window>

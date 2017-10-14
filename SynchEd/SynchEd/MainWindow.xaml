@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SynchEd"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="SynchEd" Height="350" Width="525">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <Menu DockPanel.Dock="Top">
@@ -41,6 +41,14 @@
                 <Button x:Name="btnPrint" Click="btnPrint_Click">
                     <Image Source="print.png" Width="16" Height="16"></Image>
                 </Button>
+                <Separator />
+                <ComboBox Name="cbLanguage">
+                    <ComboBoxItem Selector.IsSelected="True">en-US</ComboBoxItem>
+                    <ComboBoxItem>fr-FR</ComboBoxItem>
+                    <ComboBoxItem>es-ES</ComboBoxItem>
+                    <ComboBoxItem>de-DE</ComboBoxItem>
+                </ComboBox>
+
             </ToolBar>
 
         </DockPanel>
@@ -57,11 +65,8 @@
                     <ColumnDefinition Width="45" />
                 </Grid.ColumnDefinitions>
                 <RichTextBox x:Name="rtbDocumentEditor" Grid.Column="0" Margin="10" SelectionChanged="rtbDocumentEditor_SelectionChanged" SpellCheck.IsEnabled="True">
-                    <RichTextBox.Resources>
-                        <Style TargetType="{x:Type Paragraph}">
-                            <Setter Property="Margin" Value="0" />
-                        </Style>
-                    </RichTextBox.Resources>
+                    <FlowDocument Language="{Binding SelectedItem.Content, ElementName=cbLanguage, ConverterCulture=en-us}">
+                    </FlowDocument>
                 </RichTextBox>
                 <Canvas Grid.Column="3" />
                 <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />

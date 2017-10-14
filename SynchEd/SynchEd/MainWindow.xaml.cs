@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Deployment.Application;
 using System.Web;
 using System.Collections.Specialized;
+using System.Globalization;
 
 namespace SynchEd
 {
@@ -141,7 +142,7 @@ namespace SynchEd
                 // Complete model initialization
                 Model = SynchedModel.GetInstance(rtbDocumentEditor.Document, strSynchedUser);
 
-                // Setup spell check default language
+
             }
             catch (Exception exEx)
             {
@@ -169,8 +170,7 @@ namespace SynchEd
 
         private void rtbDocumentEditor_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            //FIXME debud why we're getting an exception
-            /*object temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontWeightProperty);
+            object temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontWeightProperty);
             btnBold.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontWeights.Bold));
             temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontStyleProperty);
             btnItalic.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontStyles.Italic));
@@ -180,7 +180,7 @@ namespace SynchEd
             temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontFamilyProperty);
             cmbFontFamily.SelectedItem = temp;
             temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontSizeProperty);
-            cmbFontSize.Text = temp.ToString();*/
+            cmbFontSize.Text = temp.ToString();
         }
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)
