@@ -67,6 +67,19 @@ namespace SynchEd
             Application.Current.Shutdown();
         }
 
+        private void SetupSpellCheckLanguageSelector()
+        {
+            List<LanguageSelector> lstSpellCheckLanguages = new List<LanguageSelector>();
+            lstSpellCheckLanguages.Add(new LanguageSelector { IETFCode = "en-US", OriginalLanguageName = "English", EnglishNameOfLanguage = "English" });
+            lstSpellCheckLanguages.Add(new LanguageSelector { IETFCode = "fr-FR", OriginalLanguageName = "Français", EnglishNameOfLanguage = "French" });
+            lstSpellCheckLanguages.Add(new LanguageSelector { IETFCode = "es-ES", OriginalLanguageName = "Español", EnglishNameOfLanguage = "Spanish" });
+            lstSpellCheckLanguages.Add(new LanguageSelector { IETFCode = "de-DE", OriginalLanguageName = "Deutsche", EnglishNameOfLanguage = "German" });
+
+            // Set combo box source to our list. XAML data bindings will take care of the rest
+            cbLanguage.ItemsSource = lstSpellCheckLanguages;
+            cbLanguage.SelectedIndex = 0;
+        }
+
         private void SetupUserKeyFromInstallURL()
         {
             // Setup User Key from instllation URL when we're first run
@@ -116,6 +129,9 @@ namespace SynchEd
                 dlgSelectDoc = new SelectDocumentDialog();
                 dlgSaveAs = new SaveAsDialog();
                 dlgPrint = new PrintDialog();
+
+                // Language Selector
+                SetupSpellCheckLanguageSelector();
             }
             catch (Exception exEx)
             {

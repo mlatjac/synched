@@ -43,10 +43,11 @@
                 </Button>
                 <Separator />
                 <ComboBox Name="cbLanguage">
-                    <ComboBoxItem Selector.IsSelected="True">en-US</ComboBoxItem>
-                    <ComboBoxItem>fr-FR</ComboBoxItem>
-                    <ComboBoxItem>es-ES</ComboBoxItem>
-                    <ComboBoxItem>de-DE</ComboBoxItem>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding OriginalLanguageName}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
 
             </ToolBar>
@@ -65,7 +66,7 @@
                     <ColumnDefinition Width="45" />
                 </Grid.ColumnDefinitions>
                 <RichTextBox x:Name="rtbDocumentEditor" Grid.Column="0" Margin="10" SelectionChanged="rtbDocumentEditor_SelectionChanged" SpellCheck.IsEnabled="True">
-                    <FlowDocument Language="{Binding SelectedItem.Content, ElementName=cbLanguage, ConverterCulture=en-us}">
+                    <FlowDocument Language="{Binding SelectedItem.IETFCode, ElementName=cbLanguage, ConverterCulture=en-us}">
                     </FlowDocument>
                 </RichTextBox>
                 <Canvas Grid.Column="3" />
