@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Documents;
 
 namespace SynchEd
@@ -52,6 +54,27 @@ namespace SynchEd
                 ModelUniqueInstance = new SynchedModel(fdDoc, strSynchedUser);
 
             return ModelUniqueInstance;
+        }
+
+        // Method to clone a flow document. Used to return a copy to print
+        public static FlowDocument Clone(FlowDocument fDoc)
+        {
+            FlowDocument fdClone = new FlowDocument();
+
+            TextRange trOriginal = new TextRange(fDoc.ContentStart, fDoc.ContentEnd);
+            MemoryStream stream = new MemoryStream();
+            trOriginal.Save(stream, DataFormats.Xaml); // Format might be Xaml
+
+            //string xamlText = Encoding.UTF8.GetString(stream.ToArray());
+            //tbXAMLPreview.Text = xamlText;
+
+            //MemoryStream stream = new MemoryStream();
+            TextRange trClone = new TextRange(fdClone.ContentStart, fdClone.ContentEnd);
+            //stream = new MemoryStream(Encoding.UTF8.GetBytes(tbXAMLPreview.Text));
+            trClone.Load(stream, System.Windows.DataFormats.Xaml);
+            stream.Close();
+
+            return fdClone;
         }
 
         private SynchedModel(FlowDocument fdDoc, String strUser)

@@ -151,7 +151,7 @@ namespace SynchEd
 
             // FIXME Remove test data and dialog loop
             SetupTestData();
-            LoopThroughDialogs();
+            //LoopThroughDialogs();
         }
 
         private void cmbFontFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -169,7 +169,8 @@ namespace SynchEd
 
         private void rtbDocumentEditor_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            object temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontWeightProperty);
+            //FIXME debud why we're getting an exception
+            /*object temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontWeightProperty);
             btnBold.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontWeights.Bold));
             temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontStyleProperty);
             btnItalic.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontStyles.Italic));
@@ -179,45 +180,25 @@ namespace SynchEd
             temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontFamilyProperty);
             cmbFontFamily.SelectedItem = temp;
             temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontSizeProperty);
-            cmbFontSize.Text = temp.ToString();
+            cmbFontSize.Text = temp.ToString();*/
         }
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
-            // FIXME Rich Text Box text dissapears after printing
-            // Need to clone document
-            IDocumentPaginatorSource idpSource = rtbDocumentEditor.Document;
+            // Need to clone document otherwise Rich Text Box text dissapears after printing
+            FlowDocument fdPrintClone = SynchedModel.Clone(rtbDocumentEditor.Document);
 
-            /*
-            FlowDocument doc = new FlowDocument();
-
-            // Create a Section
-            Section sec = new Section();
-
-            // Create first Paragraph
-            Paragraph p1 = new Paragraph();
-            // Create and add a new Bold, Italic and Underline
-            Bold bld = new Bold();
-            bld.Inlines.Add(new Run("First Paragraph"));
-            Italic italicBld = new Italic();
-            italicBld.Inlines.Add(bld);
-            Underline underlineItalicBld = new Underline();
-            underlineItalicBld.Inlines.Add(italicBld);
-            // Add Bold, Italic, Underline to Paragraph
-            p1.Inlines.Add(underlineItalicBld);
-
-            // Add Paragraph to Section
-            sec.Blocks.Add(p1);
-
-            // Add Section to FlowDocument
-            doc.Blocks.Add(sec);
-
-            IDocumentPaginatorSource idpSource = doc; */
 
             if (dlgPrint.ShowDialog() == true)
             {
+                // We need to set a column width, otherwise printing defaults to 2 columns (half of page size)
+                fdPrintClone.IsColumnWidthFlexible = false;
+                fdPrintClone.PageWidth = dlgPrint.PrintableAreaWidth;
+                fdPrintClone.ColumnWidth = dlgPrint.PrintableAreaWidth;
+
+                IDocumentPaginatorSource idpSource = fdPrintClone;
+
                 dlgPrint.PrintDocument(idpSource.DocumentPaginator, "SynchEdPrinting");
-                //this.Activate();
             }
         }
     }

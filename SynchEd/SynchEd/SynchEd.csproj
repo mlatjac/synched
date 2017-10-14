@@ -52,10 +52,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>591E4432A700E78917425F680BB40D93CA4F0BF7</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>B353A6377C60D8FE5287C73999C4D430D7C81CF1</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>SynchEd_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>SynchEd_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -147,6 +147,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="SynchEd_1_TemporaryKey.pfx" />
+    <None Include="SynchEd_2_TemporaryKey.pfx" />
     <None Include="SynchEd_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
