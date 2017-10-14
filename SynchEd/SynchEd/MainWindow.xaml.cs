@@ -158,6 +158,9 @@ namespace SynchEd
                 // Complete model initialization
                 Model = SynchedModel.GetInstance(rtbDocumentEditor.Document, strSynchedUser);
 
+                // Set some info in status bar
+                lblUser.Text = "Connected as: " + Model.UserName;
+
 
             }
             catch (Exception exEx)

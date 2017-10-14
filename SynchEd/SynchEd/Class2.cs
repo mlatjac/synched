@@ -34,7 +34,23 @@ namespace SynchEd
         // Fetch a user by key
         public SynchedUser GetUserByKey(String strKey)
         {
-            return new SynchedUser { Name = "Suzan" }; //FIXME: actually get a user from DB
+            // Select
+            SqlCommand command = new SqlCommand("SELECT * FROM [dbo].[User] WHERE UserKey=@UserKey", conn);
+            command.Parameters.Add(new SqlParameter("UserKey", strKey));
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                SynchedUser suUserForKey = null;
+                while (reader.Read())
+                {
+                    // Create a Person object
+                    suUserForKey = new SynchedUser { Id = (int)reader["Id"], Name = (string)reader["Name"], UserKey = (string)reader["UserKey"] };
+                }
+
+                return suUserForKey;
+            }
+            // FIXME Remove test data stub below
+            //return new SynchedUser { Name = "Suzan" }; //FIXME: actually get a user from DB
         }
     }
 
@@ -84,6 +100,11 @@ namespace SynchEd
 
             // Get a user object for the current user
             currentUser = ModelDB.GetUserByKey(strUser);
+
+            if (currentUser == null)
+            {
+                throw new Exception("No user found for user key " + strUser);
+            }
         }
 
         // Return all system users
@@ -141,6 +162,15 @@ namespace SynchEd
             lstCollabDocs.Add(new SynchedDocument { Name = "IT Course Outline", OwnerName = "Dave" });
 
             return lstCollabDocs;
+        }
+
+        // Return the user's name
+        public String UserName
+        {
+            get
+            {
+                return currentUser.Name;
+            }
         }
 
     }

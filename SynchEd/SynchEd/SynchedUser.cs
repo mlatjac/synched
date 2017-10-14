@@ -9,6 +9,8 @@ namespace SynchEd
     public class SynchedUser
     {
         private string _name;
+        private int _id;
+        private string _userKey;
 
         public string Name
         {
@@ -19,6 +21,28 @@ namespace SynchEd
             set
             {
                 _name = value;
+            }
+        }
+        public string UserKey
+        {
+            get
+            {
+                return _userKey;
+            }
+            set
+            {
+                _userKey = value;
+            }
+        }
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
             }
         }
     }

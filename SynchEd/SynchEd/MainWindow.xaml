@@ -57,6 +57,9 @@
             <StatusBarItem>
                 <TextBlock Name="lblCursorPosition" />
             </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Name="lblUser" Text=""/>
+            </StatusBarItem>
         </StatusBar>
         <ScrollViewer>
             <Grid>
