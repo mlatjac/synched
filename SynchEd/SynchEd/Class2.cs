@@ -52,6 +52,30 @@ namespace SynchEd
             // FIXME Remove test data stub below
             //return new SynchedUser { Name = "Suzan" }; //FIXME: actually get a user from DB
         }
+        public string GetDocXamlContent(int Id)
+        {
+            string XamlContent = "";
+            // Select
+            SqlCommand command = new SqlCommand("SELECT * FROM Document WHERE ID=@DocId", conn);
+            command.Parameters.Add(new SqlParameter("DocId", Id));
+
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    XamlContent += reader["XAMLContent"];
+                }
+            }
+            return XamlContent;
+        }
+        public void SetDocXamlContent(int Id, string XamlContent)
+        {
+            // Update
+            SqlCommand updateCommand = new SqlCommand("UPDATE Document Set XAMLContent = @NewXaml", conn);
+            updateCommand.Parameters.Add(new SqlParameter("NewXaml", XamlContent));
+            updateCommand.ExecuteNonQuery();
+        }
     }
 
     public class SynchedModel
@@ -72,6 +96,24 @@ namespace SynchEd
             return ModelUniqueInstance;
         }
 
+        private SynchedModel(FlowDocument fdDoc, String strUser)
+        {
+            ModelDB = SynchedDB.GetInstance();
+            Doc = fdDoc;
+
+            // Get a user object for the current user
+            currentUser = ModelDB.GetUserByKey(strUser);
+
+            if (currentUser == null)
+            {
+                throw new Exception("No user found for user key " + strUser);
+            }
+
+            // Create an object for the current document
+            SDCurrentDoc = new SynchedDocument { Id = 1, Owner = currentUser }; // FIXME Document ID is hardcoded
+        }
+
+
         // Method to clone a flow document. Used to return a copy to print
         public static FlowDocument Clone(FlowDocument fDoc)
         {
@@ -91,20 +133,6 @@ namespace SynchEd
             stream.Close();
 
             return fdClone;
-        }
-
-        private SynchedModel(FlowDocument fdDoc, String strUser)
-        {
-            ModelDB = SynchedDB.GetInstance();
-            Doc = fdDoc;
-
-            // Get a user object for the current user
-            currentUser = ModelDB.GetUserByKey(strUser);
-
-            if (currentUser == null)
-            {
-                throw new Exception("No user found for user key " + strUser);
-            }
         }
 
         // Return all system users
@@ -156,10 +184,10 @@ namespace SynchEd
         {
             // FIXME Actually return documents a person is collaborating on
             List<SynchedDocument> lstCollabDocs = new List<SynchedDocument>();
-            lstCollabDocs.Add(new SynchedDocument { Name = "School Project 1", OwnerName = "Mary" });
-            lstCollabDocs.Add(new SynchedDocument { Name = "Wedding Plans", OwnerName = "Suzan" });
-            lstCollabDocs.Add(new SynchedDocument { Name = "Daily Scrum", OwnerName = "Sandy" });
-            lstCollabDocs.Add(new SynchedDocument { Name = "IT Course Outline", OwnerName = "Dave" });
+            lstCollabDocs.Add(new SynchedDocument { Name = "School Project 1", Owner = (new SynchedUser { Name = "Mary" }) });
+            lstCollabDocs.Add(new SynchedDocument { Name = "Wedding Plans", Owner = (new SynchedUser { Name = "Suzan" }) });
+            lstCollabDocs.Add(new SynchedDocument { Name = "Daily Scrum", Owner = (new SynchedUser { Name = "Sandy" }) });
+            lstCollabDocs.Add(new SynchedDocument { Name = "IT Course Outline", Owner = (new SynchedUser { Name = "Dave" }) });
 
             return lstCollabDocs;
         }
@@ -173,5 +201,38 @@ namespace SynchEd
             }
         }
 
+        // Get Content from DB
+        public void RetrieveContent()
+        {
+            SDCurrentDoc.XamlContent = ModelDB.GetDocXamlContent(SDCurrentDoc.Id);
+        }
+        // Save content to DB
+        public void SaveContent()
+        {
+            ModelDB.SetDocXamlContent(SDCurrentDoc.Id, SDCurrentDoc.XamlContent);
+        }
+
+        // Load content into Editor Flow Doc
+        public void LoadDocContent()
+        {
+            MemoryStream stream = new MemoryStream();
+            TextRange range = new TextRange(Doc.ContentStart, Doc.ContentEnd);
+            stream = new MemoryStream(Encoding.UTF8.GetBytes(SDCurrentDoc.XamlContent));
+            range.Load(stream, System.Windows.DataFormats.Xaml);
+            stream.Close();
+        }
+        // Update Doc content from Editor
+        public void UpdateDocContent()
+        {
+            TextRange range = new TextRange(Doc.ContentStart, Doc.ContentEnd);
+            MemoryStream stream = new MemoryStream();
+            range.Save(stream, DataFormats.Xaml);
+            SDCurrentDoc.XamlContent = Encoding.UTF8.GetString(stream.ToArray());
+        }
+        // Create Document in DB
+        public void CreateDocument()
+        {
+
+        }
     }
 }

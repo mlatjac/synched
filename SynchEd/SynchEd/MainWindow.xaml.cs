@@ -220,5 +220,17 @@ namespace SynchEd
                 dlgPrint.PrintDocument(idpSource.DocumentPaginator, "SynchEdPrinting");
             }
         }
+
+        private void miOpen_Click(object sender, RoutedEventArgs e)
+        {
+            Model.RetrieveContent();
+            Model.LoadDocContent();
+        }
+
+        private void miSave_Click(object sender, RoutedEventArgs e)
+        {
+            Model.UpdateDocContent();
+            Model.SaveContent();
+        }
     }
 }

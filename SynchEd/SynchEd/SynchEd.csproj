@@ -95,6 +95,7 @@
     <Compile Include="SelectDocumentDialog.xaml.cs">
       <DependentUpon>SelectDocumentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SynchedDocument.cs" />
     <Compile Include="SynchedUser.cs" />
     <Compile Include="SynchedUserAccess.cs" />
     <Page Include="CollaboratorsDialog.xaml">

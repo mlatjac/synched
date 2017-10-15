@@ -11,8 +11,8 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_New" />
-                    <MenuItem Header="_Open" />
-                    <MenuItem Header="_Save" />
+                    <MenuItem x:Name="miOpen" Header="_Open" Click="miOpen_Click" />
+                    <MenuItem x:Name="miSave" Header="_Save" Click="miSave_Click" />
                     <Separator />
                     <MenuItem Header="_Exit" />
                 </MenuItem>
