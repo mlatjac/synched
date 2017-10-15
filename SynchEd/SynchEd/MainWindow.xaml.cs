@@ -183,7 +183,10 @@ namespace SynchEd
 
         private void cmbFontSize_TextChanged(object sender, TextChangedEventArgs e)
         {
-            rtbDocumentEditor.Selection.ApplyPropertyValue(Inline.FontSizeProperty, cmbFontSize.Text);
+            double dblFontSize;
+
+            if (Double.TryParse(cmbFontSize.Text, out dblFontSize) == true)
+                rtbDocumentEditor.Selection.ApplyPropertyValue(Inline.FontSizeProperty, dblFontSize);
 
         }
 
@@ -199,7 +202,11 @@ namespace SynchEd
             temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontFamilyProperty);
             cmbFontFamily.SelectedItem = temp;
             temp = rtbDocumentEditor.Selection.GetPropertyValue(Inline.FontSizeProperty);
-            cmbFontSize.Text = temp.ToString();
+            double dblFontSize;
+            if (Double.TryParse(temp.ToString(), out dblFontSize) == true)
+                cmbFontSize.Text = dblFontSize.ToString();
+            else
+                cmbFontSize.Text = "";
         }
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)
