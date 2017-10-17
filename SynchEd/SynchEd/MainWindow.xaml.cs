@@ -18,6 +18,7 @@ using System.Deployment.Application;
 using System.Web;
 using System.Collections.Specialized;
 using System.Globalization;
+using System.IO;
 
 namespace SynchEd
 {
@@ -238,6 +239,26 @@ namespace SynchEd
         {
             Model.UpdateDocContent();
             Model.SaveContent();
+        }
+
+        private void rtbDocumentEditor_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Console.WriteLine("Changes:");
+            MemoryStream stream = new MemoryStream();
+
+
+            foreach (TextChange tc in e.Changes)
+            {
+                Console.WriteLine("Removed : " + tc.RemovedLength.ToString());
+                TextRange range = new TextRange(rtbDocumentEditor.Document.ContentStart.GetPositionAtOffset(tc.Offset), rtbDocumentEditor.Document.ContentStart.GetPositionAtOffset((tc.Offset + tc.AddedLength)));
+                range.Save(stream, DataFormats.Xaml); // Format might be Xaml
+                Console.Write(Encoding.UTF8.GetString(stream.ToArray()));
+
+            }
+
+            Console.WriteLine("\nEnd of changes");
+            return;
+
         }
     }
 }

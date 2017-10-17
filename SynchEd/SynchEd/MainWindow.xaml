@@ -68,7 +68,7 @@
                     <ColumnDefinition Width="5" />
                     <ColumnDefinition Width="45" />
                 </Grid.ColumnDefinitions>
-                <RichTextBox x:Name="rtbDocumentEditor" Grid.Column="0" Margin="10" SelectionChanged="rtbDocumentEditor_SelectionChanged" SpellCheck.IsEnabled="True">
+                <RichTextBox x:Name="rtbDocumentEditor" Grid.Column="0" Margin="10" SelectionChanged="rtbDocumentEditor_SelectionChanged" SpellCheck.IsEnabled="True" TextChanged="rtbDocumentEditor_TextChanged">
                     <FlowDocument Language="{Binding SelectedItem.IETFCode, ElementName=cbLanguage, ConverterCulture=en-us}">
                     </FlowDocument>
                 </RichTextBox>
