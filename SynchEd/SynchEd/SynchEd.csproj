@@ -52,10 +52,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>E0C4EDBB4D796E6E095CAEC03C764E53785FEE98</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>289A628372FF4DD2800819D75DE0219251892677</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>SynchEd_6_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>SynchEd_7_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -154,6 +154,7 @@
     <None Include="SynchEd_4_TemporaryKey.pfx" />
     <None Include="SynchEd_5_TemporaryKey.pfx" />
     <None Include="SynchEd_6_TemporaryKey.pfx" />
+    <None Include="SynchEd_7_TemporaryKey.pfx" />
     <None Include="SynchEd_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

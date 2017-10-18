@@ -244,21 +244,23 @@ namespace SynchEd
         private void rtbDocumentEditor_TextChanged(object sender, TextChangedEventArgs e)
         {
             Console.WriteLine("Changes:");
-            MemoryStream stream = new MemoryStream();
 
+            
 
             foreach (TextChange tc in e.Changes)
             {
-                Console.WriteLine("Removed : " + tc.RemovedLength.ToString());
+                MemoryStream stream = new MemoryStream();
+
+                Console.WriteLine("Removed : " + tc.RemovedLength.ToString() + "Added : " + tc.AddedLength.ToString());
                 TextRange range = new TextRange(rtbDocumentEditor.Document.ContentStart.GetPositionAtOffset(tc.Offset), rtbDocumentEditor.Document.ContentStart.GetPositionAtOffset((tc.Offset + tc.AddedLength)));
-                range.Save(stream, DataFormats.Xaml); // Format might be Xaml
+                range.Save(stream, DataFormats.Xaml, true); // Format might be Xaml
                 Console.Write(Encoding.UTF8.GetString(stream.ToArray()));
 
+                stream.Close();
             }
 
             Console.WriteLine("\nEnd of changes");
             return;
-
         }
     }
 }

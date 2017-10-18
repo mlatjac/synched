@@ -161,7 +161,10 @@ namespace POCFullUpdateCycle
 
         private void rtbClient1_TextChanged(object sender, TextChangedEventArgs e)
         {
-           Console.WriteLine("TextChanged Changes:");
+            // Based on https://msdn.microsoft.com/en-us/library/system.windows.controls.textchangedeventargs.changes(v=vs.110).aspx
+            // And https://msdn.microsoft.com/en-us/library/system.windows.controls.textchange(v=vs.110).aspx
+
+            Console.WriteLine("TextChanged Changes:");
             if (e.Changes.Count == 0)
                 Console.WriteLine("Change event with empty collection");
             
