@@ -8,7 +8,7 @@
         Title="MainWindow" Height="350" Width="662.914">
     <Grid>
         <TextBox x:Name="tbInstance1" HorizontalAlignment="Left" Height="23" Margin="24,19,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
-        <RichTextBox x:Name="rtbClient1" HorizontalAlignment="Left" Height="100" Margin="24,47,0,0" VerticalAlignment="Top" Width="400" TextChanged="rtbClient1_TextChanged">
+        <RichTextBox x:Name="rtbClient1" HorizontalAlignment="Left" Height="100" Margin="24,47,0,0" VerticalAlignment="Top" Width="400" TextChanged="rtbClient1_TextChanged" SourceUpdated="rtbClient1_SourceUpdated" SizeChanged="rtbClient1_SizeChanged" >
             <FlowDocument>
             </FlowDocument>
         </RichTextBox>

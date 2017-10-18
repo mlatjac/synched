@@ -142,7 +142,7 @@ namespace POCFullUpdateCycle
             //rtb2 = rtbClient2;
 
             //tTimer = new Timer(TimerCallBack2, null, 100, 100);
-
+            
 
             //Setup();
 
@@ -161,26 +161,51 @@ namespace POCFullUpdateCycle
 
         private void rtbClient1_TextChanged(object sender, TextChangedEventArgs e)
         {
-           Console.WriteLine("Changes:");
-            MemoryStream stream = new MemoryStream();
-
-
+           Console.WriteLine("TextChanged Changes:");
+            if (e.Changes.Count == 0)
+                Console.WriteLine("Change event with empty collection");
+            
             foreach ( TextChange tc in e.Changes)
             {
-                TextRange range = new TextRange(rtbClient1.Document.ContentStart.GetPositionAtOffset(tc.Offset), rtbClient1.Document.ContentStart.GetPositionAtOffset((tc.Offset+tc.AddedLength)));
-                range.Save(stream, DataFormats.Xaml); // Format might be Xaml
+                if (tc.AddedLength > 0)
+                {
+                    MemoryStream stream = new MemoryStream();
 
-                TextRange range2 = new TextRange(rtbClient2.Document.ContentStart.GetPositionAtOffset(tc.Offset), rtbClient2.Document.ContentStart.GetPositionAtOffset(tc.Offset));
+                    TextRange range = new TextRange(rtbClient1.Document.ContentStart.GetPositionAtOffset(tc.Offset), rtbClient1.Document.ContentStart.GetPositionAtOffset((tc.Offset + tc.AddedLength)));
+                    range.Save(stream, DataFormats.Xaml); // Format might be Xaml
 
-                range2.Load(stream, DataFormats.Xaml);
+                    TextRange range2 = new TextRange(rtbClient2.Document.ContentStart.GetPositionAtOffset(tc.Offset), rtbClient2.Document.ContentStart.GetPositionAtOffset(tc.Offset));
+
+                    range2.Load(stream, DataFormats.Xaml);
+
+                    stream.Close();
+                } else if (tc.RemovedLength > 0)
+                {
+                    TextRange range = new TextRange(rtbClient2.Document.ContentStart.GetPositionAtOffset(tc.Offset), rtbClient2.Document.ContentStart.GetPositionAtOffset((tc.Offset + tc.RemovedLength)));
+                    range.Text = "";
+                } else
+                {
+                    Console.WriteLine("Empty change");
+                }
             }
 
             //TextRangerange range = new TextRange(rtb1.Document.ContentStart.GetPositionAtOffset(e.Changes.FirstOrDefault<TextChange>., rtbMainDoc.Document.ContentEnd);
-            //range.Save(Console.Out, DataFormats.Xaml); // Format might be Xaml
             Console.WriteLine("\nEnd of changes");
             return;
 
           
+        }
+
+        private void rtbClient1_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            Console.WriteLine("Source updated event handler invoked");
+        }
+
+        private void rtbClient1_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Console.WriteLine("Size changed event handler invoked");
+           
+
         }
     }
 }
