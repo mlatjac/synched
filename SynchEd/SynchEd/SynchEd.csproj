@@ -14,7 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>F:\MLDeploy\</PublishUrl>
+    <PublishUrl>C:\xampp\htdocs\ipd\mlportfolio\assets\sites\SynchEdWebDeploy\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -24,9 +24,9 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://10.64.21.11:8080/</InstallUrl>
+    <InstallUrl>http://miguel.ipd10.com/assets/sites/SynchEdWebDeploy/</InstallUrl>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>30</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -52,10 +52,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>289A628372FF4DD2800819D75DE0219251892677</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>93641C08F742342454A54CD94A3C2350CD4572DC</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>SynchEd_7_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>SynchEd_8_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -155,6 +155,7 @@
     <None Include="SynchEd_5_TemporaryKey.pfx" />
     <None Include="SynchEd_6_TemporaryKey.pfx" />
     <None Include="SynchEd_7_TemporaryKey.pfx" />
+    <None Include="SynchEd_8_TemporaryKey.pfx" />
     <None Include="SynchEd_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

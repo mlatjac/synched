@@ -86,14 +86,18 @@ namespace SynchEd
             // Setup User Key from instllation URL when we're first run
             NameValueCollection nameValueTable = new NameValueCollection();
             String strUserKey;
+
             try
             {
                 if (ApplicationDeployment.IsNetworkDeployed)
                 {
+
                     string queryString = ApplicationDeployment.CurrentDeployment.ActivationUri.Query;
 
                     if (String.IsNullOrEmpty(queryString) == true)
+                    {
                         return;
+                    }
 
                     nameValueTable = HttpUtility.ParseQueryString(queryString);
                     strUserKey = nameValueTable.Get("UserKey");
@@ -101,7 +105,6 @@ namespace SynchEd
                     {
                         Properties.Settings.Default.SynchedUserKey = strUserKey;
                         Properties.Settings.Default.Save();
-
                     }
                 }
             }
@@ -151,9 +154,12 @@ namespace SynchEd
 
                 if (String.IsNullOrEmpty(strSynchedUser) == true)
                 {
-                    // FIXME Put user checking back in
-                    //MessageBox.Show("This application requires a user account on the SyncEd website. Create an account and install the application directly from your profile page.");
+                    // Use message below in production
+                    //MessageBox.Show("This application requires a user account on the SynchEd website. Create an account and install the application directly from your profile page.");
                     //AbortStartupAndExit();
+
+                    // For demo purposes, allow a default user
+                    MessageBox.Show("This demo is best when using a configured installation of SynchEd. You may be seing this message because you installed from Chrome. Try installing from Windows Explorer instead.");
                     strSynchedUser = "UUUZ";
                 }
                 // Complete model initialization
